@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: my-note
+  servlet:
+    multipart:
+      max-file-size: 10240KB
+      max-request-size: 10240KB
+  data:
+    mongodb:
+      uri: ${MONGO_URL:mongodb://localhost:27017/my_note}
+my-note:
+  upload-dir: ${UPLOAD_DIR:D:\workspaces\self_git\loveit-1990\k8s-my-note\assets\uploads\}
