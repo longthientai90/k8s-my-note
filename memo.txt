@@ -1,0 +1,3 @@
+docker pull longdd90jp/my-note:0.1
+docker build -t longdd90jp/my-note:0.1 .
+mvn package -DskipTests

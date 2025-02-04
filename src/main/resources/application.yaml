@@ -9,4 +9,5 @@ spring:
     mongodb:
       uri: ${MONGO_URL:mongodb://localhost:27017/my_note}
 my-note:
+  time-zone: ${TIME_ZONE:Asia/Ho_Chi_Minh} # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   upload-dir: ${UPLOAD_DIR:D:\workspaces\self_git\loveit-1990\k8s-my-note\assets\uploads\}

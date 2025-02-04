@@ -4,6 +4,8 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Document(collection = "notes")
 @Data
 public class Note {
@@ -12,6 +14,7 @@ public class Note {
     private String description;
     private String fileName;
     private String attachment;
+    private Date createdDate;
 
     @Override
     public String toString() {

@@ -1,0 +1,40 @@
+version: '2'
+
+networks:
+  my_note_network:
+    driver: bridge
+
+services:
+  my-note:
+    image: longdd90jp/my-note:0.1
+    container_name: my-note
+    environment:
+      - MONGO_URL=mongodb://dummy:dummy1A42@mongodb:27017/my_note
+      - UPLOAD_DIR=/tmp/uploads/
+    ports:
+      - '8085:8080'
+    volumes:
+      - 'my_note_upload:/tmp/uploads'
+    depends_on:
+      - mongodb
+    networks:
+      - my_note_network
+  mongodb:
+    image: bitnami/mongodb:7.0
+    container_name: mongodb
+    environment:
+      MONGODB_ROOT_PASSWORD: admin1B25
+      MONGODB_USERNAME: dummy
+      MONGODB_PASSWORD: dummy1A42
+      MONGODB_DATABASE: my_note
+    ports:
+      - '27037:27017'
+    volumes:
+      - 'my_note_db:/bitnami/mongodb'
+    networks:
+      - my_note_network
+volumes:
+  my_note_db:
+    driver: local
+  my_note_upload:
+    driver: local

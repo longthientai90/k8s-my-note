@@ -30,7 +30,8 @@
         <#list notes as note>
             <li class="mv3 bb bw2 b--light-yellow bg-washed-yellow ph4 pv2">
                 <p>${note.description}</p>
-                <p><#if note.fileName??>attachment: ${note.fileName}</#if></p>
+                <p><#if note.fileName??><span style="color: #f75b13">attachment</span>: ${note.fileName}</#if></p>
+                <p><span style="color: #2a0de7;">created:</span> ${note.createdDate}</p>
             </li>
         <#else>
             <p class="lh-copy f6">You don't have any notes yet.</p>
