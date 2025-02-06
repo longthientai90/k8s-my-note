@@ -8,6 +8,8 @@ import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,7 @@ class NoteController {
 
     @GetMapping("/")
     public String index(Model model) {
+        setCurrentUser(model);
         noteService.getAllNotes(model);
         return "index";
     }
@@ -39,6 +42,7 @@ class NoteController {
                             @RequestParam(required = false) String upload,
                             Model model) throws Exception {
 
+        setCurrentUser(model);
         if (publish != null && publish.equals("Publish")) {
             noteService.saveNote(description, fileName, attachment, model);
             noteService.getAllNotes(model);
@@ -53,6 +57,11 @@ class NoteController {
             return "index";
         }
         return "index";
+    }
+
+    private void setCurrentUser(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("loginUserName", authentication.getName());
     }
 
     @GetMapping(value = "/files/{attachment}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
