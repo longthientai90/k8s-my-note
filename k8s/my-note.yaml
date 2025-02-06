@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-note
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: my-note-pod
+  template:
+    metadata:
+      labels:
+        component: my-note-pod
+    spec:
+      containers:
+        - name: my-note-ctn
+          image: longdd90jp/my-note:0.1
+          ports:
+            - containerPort: 8080
+              name: web-port
+          envFrom:
+            - configMapRef:
+                name: env-config
+          env:
+            - name: MONGO_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: MONGODB_USERNAME
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: MONGODB_PASSWORD
+          # the application will have a maximum of 5 minutes (30 * 10 = 300s) to finish its startup.
+          # once the startup probe has succeeded once, the liveness probe takes over to provide a fast response to container deadlocks
+          startupProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+              httpHeaders:
+                - name: Startup-Check-Header
+                  value: system
+            failureThreshold: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+              httpHeaders:
+                - name: Liveness-Check-Header
+                  value: system
+            initialDelaySeconds: 10
+            timeoutSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+              httpHeaders:
+                - name: Readiness-Check-Header
+                  value: system
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-note-svc
+  labels:
+    component: my-note-svc
+spec:
+  type: ClusterIP
+  selector:
+    component: my-note-pod
+  ports:
+    - port: 8080
+      protocol: TCP
+      name: web-port
+      targetPort: 8080

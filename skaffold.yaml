@@ -1,0 +1,20 @@
+apiVersion: skaffold/v4beta5
+kind: Config
+metadata:
+  name: my-note-deploy
+build:
+  artifacts:
+    - image: longdd90jp/my-note
+  tagPolicy:
+    gitCommit: {}
+manifests:
+  rawYaml:
+#    - k8s/env-configmap.yaml
+#    - k8s/db-secret.yaml
+#    - k8s/mongo-*.yaml
+#    - k8s/ingress.yaml
+    - k8s/my-note-*.yaml
+
+deploy:
+  kubectl:
+    defaultNamespace: my-note

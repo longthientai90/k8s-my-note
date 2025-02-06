@@ -23,6 +23,7 @@ services:
     image: bitnami/mongodb:7.0
     container_name: mongodb
     environment:
+      MONGODB_ROOT_USER: root
       MONGODB_ROOT_PASSWORD: admin1B25
       MONGODB_USERNAME: dummy
       MONGODB_PASSWORD: dummy1A42

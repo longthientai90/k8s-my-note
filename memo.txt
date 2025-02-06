@@ -1,3 +1,18 @@
-docker pull longdd90jp/my-note:0.1
 docker build -t longdd90jp/my-note:0.1 .
-mvn package -DskipTests
+
+mvn clean package -DskipTests
+
+docker context use default
+
+kubectl create namespace my-note;
+
+kubectl apply -f db-secret.yaml -n my-note
+kubectl apply -f env-configmap.yaml -n my-note
+kubectl apply -f mongo.yaml -n my-note
+kubectl apply -f my-note.yaml -n my-note
+
+kubectl apply -f minio-secret.yaml -n my-note
+kubectl apply -f minio.yaml -n my-note
+
+kubectl port-forward service/my-note-svc 8090:8080 -n my-note
+kubectl port-forward service/minio-svc 9000:9000 -n my-note

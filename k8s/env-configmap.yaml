@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-config
+data:
+  ACTIVE_PROFILE: "k8s"
+  SERVER_PORT: "8080"
+  TIME_ZONE: "Asia/Ho_Chi_Minh"
+  UPLOAD_DIR: "/tmp/uploads/"
+  # mongo
+  MONGO_HOST: "mongo-svc"
+  MONGO_PORT: "27017"
+  MONGO_DATA_BASE: "my_note"
+  # minio
+  MONGO_HOST: "mongo-svc"
+  MONGO_PORT: "27017"
+  MONGO_DATA_BASE: "my_note"

@@ -14,9 +14,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 
 @Service
 public class NoteService {
@@ -26,6 +29,8 @@ public class NoteService {
     private NoteRepository noteRepository;
     @Autowired
     private AppProperties properties;
+    @Autowired
+    private FileService fileService;
 
     public void getAllNotes(Model model) {
         List<Note> allNotes = noteRepository.findAll();
@@ -46,14 +51,8 @@ public class NoteService {
         return nodeResponses;
     }
 
-    public void uploadImage(MultipartFile file, String description, Model model) throws Exception {
-        File uploadsDir = new File(properties.getUploadDir());
-        if (!uploadsDir.exists()) {
-            uploadsDir.mkdirs();
-        }
-        String fileId = UUID.randomUUID() + "." +
-                file.getOriginalFilename().split("\\.")[1];
-        file.transferTo(new File(properties.getUploadDir() + fileId));
+    public void uploadFile(MultipartFile file, String description, Model model) throws Exception {
+        String fileId = fileService.uploadFile(file);
 
         // clean up the model
         model.addAttribute("description", description);
@@ -82,5 +81,9 @@ public class NoteService {
             model.addAttribute("fileName", "");
             model.addAttribute("attachment", "");
         }
+    }
+
+    public InputStream downloadFile(String fileName) throws Exception {
+        return fileService.downloadFile(fileName);
     }
 }
