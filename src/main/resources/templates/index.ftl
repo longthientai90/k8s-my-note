@@ -30,6 +30,7 @@
         <input type="hidden" name="attachment" value="<#if attachment??>${attachment}</#if>"></input>
         <input type="hidden" name="fileName" value="<#if fileName??>${fileName}</#if>"></input>
     </ol>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </form>
 <ul class="list pl0"><p class="f6 b db mb2">Notes</p>
     <#if notes??>
