@@ -34,6 +34,15 @@ services:
       - 'my_note_db:/bitnami/mongodb'
     networks:
       - my_note_network
+  redis:
+    image: 'bitnami/redis:6.2'
+    container_name: redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=true
+    networks:
+      - my_note_network
+    ports:
+      - '6379:6379'
 volumes:
   my_note_db:
     driver: local

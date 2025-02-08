@@ -10,6 +10,8 @@ import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,7 +35,7 @@ public class NoteService {
     private FileService fileService;
 
     public void getAllNotes(Model model) {
-        List<Note> allNotes = noteRepository.findAll();
+        List<Note> allNotes = noteRepository.findByOwner(getLoginUserName());
         model.addAttribute("notes", buildNodeResponseList(allNotes));
     }
 
@@ -74,6 +76,9 @@ public class NoteService {
                 note.setFileName(fileName);
             }
             note.setCreatedDate(new Date());
+
+            // owner
+            note.setOwner(getLoginUserName());
             noteRepository.save(note);
 
             // after publish you need to clean up the model
@@ -85,5 +90,10 @@ public class NoteService {
 
     public InputStream downloadFile(String fileName) throws Exception {
         return fileService.downloadFile(fileName);
+    }
+
+    private String getLoginUserName() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
     }
 }
