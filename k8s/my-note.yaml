@@ -32,6 +32,16 @@ spec:
                 secretKeyRef:
                   name: db-secret
                   key: MONGODB_PASSWORD
+            - name: MINIO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: MINIO_SECRET_KEY
+            - name: MINIO_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio-secret
+                  key: MINIO_ACCESS_KEY
           # the application will have a maximum of 5 minutes (30 * 10 = 300s) to finish its startup.
           # once the startup probe has succeeded once, the liveness probe takes over to provide a fast response to container deadlocks
           startupProbe:

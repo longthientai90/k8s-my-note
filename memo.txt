@@ -16,3 +16,6 @@ kubectl apply -f minio.yaml -n my-note
 
 kubectl port-forward service/my-note-svc 8090:8080 -n my-note
 kubectl port-forward service/minio-svc 9000:9000 -n my-note
+
+skaffold dev --no-prune=false --cache-artifacts=false
+skaffold delete
