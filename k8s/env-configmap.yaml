@@ -17,3 +17,6 @@ data:
   MINIO_BUCKET: "upload-storage"
   MINIO_RECONNECT_ENABLED: "true"
   MINIO_USE_SSL: "false"
+  #redis
+  REDIS_HOST: "redis-svc"
+  REDIS_PORT: "6379"

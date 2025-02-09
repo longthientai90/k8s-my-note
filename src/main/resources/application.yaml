@@ -12,21 +12,17 @@ spring:
   data:
     redis:
       host: ${REDIS_HOST:localhost}
-      password: ${REDIS_PASSWORD:root123}
       port: ${REDIS_PORT:6379}
 my-note:
   time-zone: ${TIME_ZONE:Asia/Ho_Chi_Minh} # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   upload-dir: ${UPLOAD_DIR:D:\workspaces\self_git\loveit-1990\k8s-my-note\assets\uploads\}
   users:
-    -
-      username: test1
+    - username: test1
       password: guest1234
       roles: USER
-    -
-      username: test2
+    - username: test2
       password: guest1234
       roles: USER
-    -
-      username: admin
+    - username: admin
       password: admin1234
       roles: USER,ADMIN

@@ -6,7 +6,7 @@ networks:
 
 services:
   my-note:
-    image: longdd90jp/my-note:0.1
+    image: 'longdd90jp/my-note:0.1'
     container_name: my-note
     environment:
       - MONGO_URL=mongodb://dummy:dummy1A42@mongodb:27017/my_note
@@ -20,7 +20,7 @@ services:
     networks:
       - my_note_network
   mongodb:
-    image: bitnami/mongodb:7.0
+    image: 'bitnami/mongodb:7.0'
     container_name: mongodb
     environment:
       MONGODB_ROOT_USER: root
@@ -38,7 +38,7 @@ services:
     image: 'bitnami/redis:6.2'
     container_name: redis
     environment:
-      - ALLOW_EMPTY_PASSWORD=true
+      - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - my_note_network
     ports:

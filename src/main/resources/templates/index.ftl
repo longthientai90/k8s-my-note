@@ -8,7 +8,8 @@
 <h1 class="f2 mb0">
     <span onclick="gotoHome();" style="cursor: pointer;"><span class="gold">My</span>Note</span>
     <span style="float: right;font-size: 20px;color: #8282ec;padding-top: 10px;font-weight: normal">
-        <a href="/logout" title="Logout">${loginUserName}</a>
+        <span>Hi: ${loginUserName}</span>
+        <a href="/logout" title="logout" style="margin-left: 10px;">Logout</a>
     </span>
 </h1>
 <p class="f5 mt1 mb4 lh-copy">A simple note-taking app.</p>

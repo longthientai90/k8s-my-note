@@ -13,6 +13,7 @@ manifests:
 #    - k8s/db-secret.yaml
 #    - k8s/minio-secret.yaml
 #    - k8s/mongo.yaml
+#    - k8s/redis.yaml
 #    - k8s/minio.yaml
 #    - k8s/ingress.yaml
     - k8s/my-note.yaml
