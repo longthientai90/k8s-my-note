@@ -3,6 +3,7 @@ package dangtit90.top.samples.my_note.config.security;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -13,6 +14,7 @@ import java.time.Duration;
 
 @Configuration
 @EnableRedisHttpSession
+@Profile("k8s")
 public class SessionConfig extends AbstractHttpSessionApplicationInitializer {
     @Value("${spring.data.redis.host}")
     private String redisHost;
