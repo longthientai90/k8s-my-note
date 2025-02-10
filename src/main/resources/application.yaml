@@ -23,6 +23,9 @@ my-note:
     - username: test2
       password: guest1234
       roles: USER
+    - username: test3
+      password: guest1234
+      roles: USER
     - username: admin
       password: admin1234
       roles: USER,ADMIN

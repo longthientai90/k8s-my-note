@@ -11,12 +11,3 @@ data:
   MONGO_HOST: "mongo-svc"
   MONGO_PORT: "27017"
   MONGO_DATA_BASE: "my_note"
-  # minio
-  MINIO_HOST: "minio-svc"
-  MINIO_PORT: "9000"
-  MINIO_BUCKET: "upload-storage"
-  MINIO_RECONNECT_ENABLED: "true"
-  MINIO_USE_SSL: "false"
-  #redis
-  REDIS_HOST: "redis-svc"
-  REDIS_PORT: "6379"
