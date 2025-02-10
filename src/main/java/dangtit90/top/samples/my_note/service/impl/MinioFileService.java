@@ -15,7 +15,6 @@ import java.io.InputStream;
 import java.util.UUID;
 
 @Service
-@Profile("k8s")
 @Slf4j
 public class MinioFileService implements FileService {
     @Autowired
